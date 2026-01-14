@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Pinzon | RiskLens</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="risklens-page">
+    <header>
+        <div class="nav">
+            <div class="nav-title">Daniel Pinzon</div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="projects.html">Projects</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="risklens">
+            <div class="reveal">
+                <h1 class="about-title">RiskLens</h1>
+            </div>
+            <div class="risklens-body">
+                <div class="eyebrow">RAG Chatbot for Automating 10-K Risk and KPI Analysis</div>
+
+                <div class="risklens-section">
+                    <h2>Overview</h2>
+                    <p>RiskLens is a chatbot built on a retrieval-augmented generation (RAG) architecture to automate 10-K analysis. It retrieves evidence directly from SEC filings, computes KPIs from XBRL data, and returns cited answers that are faster and more reliable than manual review or general-purpose AI.</p>
+                    <p>The system is designed to reduce hallucinations by grounding responses in retrieved 10-K text and reproducible KPI calculations, while improving speed, accuracy, and consistency across companies and years.</p>
+                </div>
+
+                <div class="risklens-section">
+                    <h2>The Problem</h2>
+                    <p>10-K analysis is slow, manual, and inconsistent.</p>
+                    <p>Analysts often spend hours:</p>
+                    <ul>
+                        <li>Searching dense filings to find relevant risk disclosures</li>
+                        <li>Comparing Item 1A risk language year over year</li>
+                        <li>Extracting and calculating KPIs from XBRL tables manually</li>
+                        <li>Writing summaries without a clean audit trail back to the source text</li>
+                    </ul>
+                    <p>This creates delays, increases cost, and makes it hard to scale across multiple companies and periods.</p>
+                </div>
+
+                <div class="risklens-section">
+                    <h2>The Solution</h2>
+                    <p>RiskLens combines two ideas into a single workflow:</p>
+                    <ul>
+                        <li><strong>RAG for grounded risk analysis</strong> - Instead of relying on the model's memory, RiskLens retrieves the most relevant Item 1A passages from a curated, year-aligned corpus and uses those passages as the evidence for the answer. This produces verifiable, cited outputs and reduces hallucinations.</li>
+                        <li><strong>Structured KPI computation from XBRL</strong> - KPIs are computed directly from SEC XBRL data stored locally. The model does not "guess" numbers. It summarizes results that come from reproducible calculations.</li>
+                    </ul>
+                    <p>The result is a chatbot that can answer risk and KPI questions in plain English, with citations back to the filing text and consistent KPI definitions.</p>
+                </div>
+
+                <div class="risklens-section">
+                    <h2>What RiskLens Does</h2>
+                    <ul>
+                        <li>Answers analyst questions using a RAG-based retrieval workflow grounded in SEC filings</li>
+                        <li>Returns audit-ready citations that link insights back to 10-K evidence</li>
+                        <li>Detects year-over-year changes in Item 1A risk disclosures</li>
+                        <li>Computes financial KPIs directly from SEC XBRL to ensure numeric consistency</li>
+                        <li>Produces plain-English summaries and visuals for faster review</li>
+                    </ul>
+                </div>
+
+                <div class="risklens-section">
+                    <h2>Architecture Overview</h2>
+                    <p>RiskLens is a RAG chatbot with a smart router and two specialized engines.</p>
+                    <p>When a user asks a question, the router classifies intent and routes the request to one of the following:</p>
+                    <img class="risklens-arch-image" src="architect.png" alt="RiskLens architecture diagram">
+                    <ul>
+                        <li><strong>Risk engine (RAG + YOY)</strong> - Retrieves top-matching Item 1A passages from a year-aligned risk corpus, identifies year-over-year changes, and sends evidence to the LLM for a cited summary.</li>
+                        <li><strong>KPI engine (structured data)</strong> - Queries locally stored KPI tables derived from SEC XBRL data, computes trends and comparisons, and returns reproducible numeric results.</li>
+                    </ul>
+                    <p>The LLM is used only as a synthesis layer. It combines retrieved evidence and computed KPIs to generate answers and visuals, with citations that trace back to the original filings.</p>
+                    <p>This design reduces hallucinations, improves accuracy, and returns answers in seconds.</p>
+                </div>
+
+                <div class="risklens-section">
+                    <h2>Pilot and Validation</h2>
+                    <p>RiskLens was piloted using 10-K filings from four large-cap US pharmaceutical companies across four fiscal years.</p>
+                    <ul>
+                        <li>16 analyst-style test cases covering risk, KPI, and hybrid questions</li>
+                        <li>Overall accuracy of approximately 94 percent</li>
+                        <li>Each query completed in seconds, enabling rapid review and comparison</li>
+                    </ul>
+                    <p>The pilot showed strong performance in retrieving the correct Item 1A evidence, detecting meaningful year-over-year changes, and producing KPI outputs consistent with XBRL-based calculations.</p>
+                </div>
+
+                <div class="risklens-section">
+                    <h2>Impact</h2>
+                    <p>Based on analyst interviews and pilot results:</p>
+                    <ul>
+                        <li>Manual 10-K review time reduced from roughly 2 hours per day to 30 minutes</li>
+                        <li>Approximately 390 analyst hours saved per year</li>
+                        <li>Estimated productivity gain of about $28,000 per analyst annually</li>
+                    </ul>
+                    <p>The time saved shifts effort away from searching and copy-pasting toward higher-value analysis such as modeling, valuation, and deeper risk assessment.</p>
+                </div>
+
+                <div class="risklens-section">
+                    <h2>My Role</h2>
+                    <p>This was a team project developed as part of a graduate practicum.</p>
+                    <p>My primary contributions included:</p>
+                    <ul>
+                        <li>Designing and implementing KPI computation from SEC XBRL data</li>
+                        <li>Building reproducible pipelines with validation controls</li>
+                        <li>Defining metric logic, consistency checks, and data outputs</li>
+                        <li>Contributing to system architecture and analytical framing</li>
+                    </ul>
+                </div>
+
+                <div class="risklens-section">
+                    <h2>Tech Stack</h2>
+                    <ul>
+                        <li>Python with pandas for data processing and analytics</li>
+                        <li>Local storage for structured and unstructured datasets</li>
+                        <li>Retrieval pipeline with embeddings to support RAG over Item 1A text</li>
+                        <li>Modular, file-based design for transparency and auditability</li>
+                    </ul>
+                    <p>Code is currently private. Documentation, architecture details, and examples are available upon request.</p>
+                </div>
+
+                <div class="risklens-media">
+                    <video controls>
+                        <source src="risklens.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class="risklens-actions">
+                    <a class="top-callout-link" href="projects.html#projects">Back to Projects</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="contact-footer">
+        <p>Daniel Pinzon | 2026</p>
+        <div class="footer-socials">
+            <span class="footer-socials-label">Socials:</span>
+            <a href="https://www.linkedin.com/in/danielpinzongaleano" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/Dpinz412" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </footer>
+</body>
+</html>

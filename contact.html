@@ -46,12 +46,29 @@
     </main>
 
     <footer class="contact-footer">
-        <p>Daniel Pinzon | 2025</p>
+        <p>Daniel Pinzon | 2026</p>
         <div class="footer-socials">
             <span class="footer-socials-label">Socials:</span>
             <a href="https://www.linkedin.com/in/danielpinzongaleano" target="_blank" rel="noopener">LinkedIn</a>
             <a href="https://github.com/Dpinz412" target="_blank" rel="noopener">GitHub</a>
         </div>
     </footer>
+    <script>
+        const contactForm = document.querySelector('.contact-fields');
+        const contactSubmit = document.querySelector('.contact-submit');
+        const contactMessage = contactForm.querySelector('textarea[name="message"]');
+
+        contactSubmit.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            const message = contactMessage.value.trim();
+
+            const body = message || 'Hi Daniel,';
+            const subject = 'Website contact';
+            const mailtoHref = `mailto:d.pinzon412@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            window.location.href = mailtoHref;
+        });
+    </script>
 </body>
 </html>

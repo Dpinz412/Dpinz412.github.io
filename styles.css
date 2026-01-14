@@ -693,6 +693,104 @@ h1 {
     gap: 1.8rem;
 }
 
+.project-strip {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 2rem 2.5rem;
+    display: grid;
+    grid-template-columns: minmax(200px, 260px) 1fr;
+    gap: 2.5rem;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.project-strip-image {
+    width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+    border-radius: 14px;
+    display: block;
+}
+
+.project-strip-body {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.project-strip h3 {
+    font-size: 1.6rem;
+    margin: 0;
+}
+
+.project-strip p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.project-strip:hover {
+    border-color: rgba(47, 107, 210, 0.4);
+    box-shadow: 0 14px 30px rgba(45, 32, 23, 0.12);
+    transform: translateY(-4px);
+}
+
+.project-strip:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+}
+
+.risklens-body {
+    display: grid;
+    gap: 2rem;
+    color: var(--muted);
+}
+
+.risklens-body .eyebrow {
+    margin-bottom: 0;
+}
+
+.risklens-section {
+    display: grid;
+    gap: 0.85rem;
+}
+
+.risklens-section h2 {
+    font-size: 1.75rem;
+    color: var(--ink);
+}
+
+.risklens-section p,
+.risklens-section ul {
+    color: var(--muted);
+}
+
+.risklens-section ul {
+    padding-left: 1.25rem;
+    display: grid;
+    gap: 0.6rem;
+}
+
+.risklens-arch-image {
+    width: 100%;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    background: #ffffff;
+}
+
+.risklens-media video {
+    width: 100%;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    background: #000;
+}
+
+.risklens-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
 .project-card {
     background: var(--card);
     border: 1px solid var(--line);
@@ -1009,6 +1107,11 @@ footer {
     .timeline-item.right::before {
         left: -0.3rem;
         right: auto;
+    }
+
+    .project-strip {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 }
 
