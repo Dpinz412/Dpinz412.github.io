@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Pinzon | Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body id="top" class="home-dark">
+    <header>
+        <div class="nav">
+            <div class="nav-title">Daniel Pinzon</div>
+            <nav class="nav-links">
+                <span class="nav-current">Home</span>
+                <a href="about.html">About</a>
+                <a href="projects.html">Projects</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home">
+            <div class="letter-section" id="letterSection">
+                <div class="letter-container" id="letterContainer">
+                    <div class="line">
+                        <div class="word highlight" id="word1"></div>
+                        <div class="word" id="word2"></div>
+                    </div>
+                    <div class="line">
+                        <div class="word highlight" id="word3"></div>
+                        <div class="word" id="word4"></div>
+                    </div>
+                    <div class="line subtitle">
+                        <div class="word" id="word5"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="home-statement" class="home-statement">
+            <div class="statement-card">
+                <h2>A data professional with a passion for turning analysis into better decisions.</h2>
+                <p>Deeply interested in the intersection of data, sports, and decision-making, where analytics drive performance, strategy, and competitive advantage.</p>
+            </div>
+        </section>
+
+        <section id="figurine" class="figurine-section">
+            <div class="figurine-wrap">
+                <a class="figurine-link" href="about.html">
+                    <img class="figurine" src="figurine.png" alt="Figurine illustration">
+                    <span class="figurine-callout">About me</span>
+                </a>
+            </div>
+        </section>
+
+        <div class="about-top-callout">
+            <a class="top-callout-link" href="#top">Back to top</a>
+        </div>
+    </main>
+
+    <footer class="contact-footer">
+        <p>Daniel Pinzon | 2025</p>
+        <div class="footer-socials">
+            <span class="footer-socials-label">Socials:</span>
+            <a href="https://www.linkedin.com/in/danielpinzongaleano" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/Dpinz412" target="_blank" rel="noopener">GitHub</a>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        const words = {
+            word1: "Data",
+            word2: "and",
+            word3: "analytics",
+            word4: "professional",
+            word5: "building clarity from complex systems"
+        };
+
+        function getRandomSpeed() {
+            return 0.6 + Math.random() * 0.8;
+        }
+
+        function getRandomRotation() {
+            return Math.random() * 40 - 20;
+        }
+
+        function createLetters() {
+            Object.keys(words).forEach((wordId) => {
+                const container = document.getElementById(wordId);
+                const text = words[wordId];
+
+                container.innerHTML = text.split("").map((char) => {
+                    const speed = getRandomSpeed();
+                    return `<span class="letter" data-speed="${speed}">${char === " " ? "&nbsp;" : char}</span>`;
+                }).join("");
+            });
+        }
+
+        function animateLetters() {
+            const section = document.getElementById("letterSection");
+            const letters = document.querySelectorAll(".letter");
+
+            letters.forEach((letter) => {
+                const speed = parseFloat(letter.getAttribute("data-speed"));
+                const rotation = getRandomRotation();
+                const yMove = (1 - speed) * 300;
+
+                gsap.fromTo(letter,
+                    { y: 0, rotation: 0 },
+                    {
+                        y: yMove,
+                        rotation: rotation,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top top",
+                            end: "bottom top",
+                        scrub: 0.4,
+                            markers: false
+                        }
+                    }
+                );
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            createLetters();
+
+            setTimeout(() => {
+                animateLetters();
+                ScrollTrigger.refresh();
+            }, 100);
+
+            const statement = document.querySelector(".statement-card");
+            if (statement) {
+                gsap.fromTo(
+                    statement,
+                    { autoAlpha: 0, y: 40 },
+                    {
+                        autoAlpha: 1,
+                        y: 0,
+                        duration: 0.9,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: statement,
+                            start: "top 80%"
+                        }
+                    }
+                );
+
+                gsap.fromTo(
+                    ".statement-card h2, .statement-card p",
+                    { autoAlpha: 0, y: 20 },
+                    {
+                        autoAlpha: 1,
+                        y: 0,
+                        duration: 0.7,
+                        ease: "power2.out",
+                        stagger: 0.15,
+                        scrollTrigger: {
+                            trigger: statement,
+                            start: "top 78%"
+                        }
+                    }
+                );
+            }
+
+            const figurines = gsap.utils.toArray(".figurine");
+            if (figurines.length) {
+                figurines.forEach((figurine) => {
+                    gsap.set(figurine, { y: -30, rotate: -2, autoAlpha: 0, transformOrigin: "50% 100%" });
+
+                    gsap.to(figurine, {
+                        y: 0,
+                        rotate: 1,
+                        autoAlpha: 1,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: ".figurine-section",
+                            start: "top 85%",
+                            end: "top 35%",
+                            scrub: true
+                        }
+                    });
+
+                    gsap.to(figurine, {
+                        y: 0,
+                        rotate: 0,
+                        duration: 0.55,
+                        ease: "bounce.out",
+                        scrollTrigger: {
+                            trigger: ".figurine-section",
+                            start: "top 35%",
+                            toggleActions: "play none none reverse"
+                        }
+                    });
+                });
+            }
+        });
+
+        window.addEventListener("resize", () => {
+            ScrollTrigger.refresh();
+        });
+    </script>
+</body>
+</html>
